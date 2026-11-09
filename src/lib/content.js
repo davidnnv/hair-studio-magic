@@ -33,7 +33,7 @@ export const IMG = {
 // Portfolio — client looks. `tag` drives the filter chips.
 export const WORK = [
   { src: 'img/blonde-waves.jpg', tag: 'colour', mk: 'Ледено русо и меки бранови', en: 'Icy blonde, soft waves' },
-  { src: 'img/golden-curls.jpg', tag: 'colour', mk: 'Златни праменови, холивудски локни', en: 'Golden highlights, Hollywood curls' },
+  { src: 'img/golden-curls.jpg', tag: 'colour', mk: 'Златни прамени, холивудски локни', en: 'Golden highlights, Hollywood curls' },
   { src: 'img/sleek-green.jpg', tag: 'styling', mk: 'Елегантна ниска пунџа', en: 'Sleek low bun' },
   { src: 'img/bw-glam.jpg', tag: 'styling', mk: 'Ретро бранови', en: 'Retro glam waves' },
   { src: 'img/rollers.jpg', tag: 'makeup', mk: 'Волумен и шминка за снимање', en: 'Volume set and shoot make-up' },
@@ -50,7 +50,7 @@ export const T = {
     heroKicker: 'Hair & make-up studio · Струмица',
     heroLine: ['Коса што', 'се памети.'],
     heroText: 'Фризури, боја и шминка за секој ден и за моментите што ги прераскажуваш. Студио на Марјан Петров во срцето на Струмица.',
-    seeWork: 'Погледни работи',
+    seeWork: 'Погледни креации',
     statYears: 'години искуство', statRating: 'оценка на Google', statVip: 'клиенти и сцени',
     vip: 'VIP',
     marquee: ['Свечени фризури', 'Боење', 'Sombre', 'Vibrance Gloss', 'Професионална шминка', 'Бранови', 'Пунџи', 'Едиторијал'],
@@ -101,7 +101,7 @@ export const T = {
     heroKicker: 'Hair & make-up studio · Strumica',
     heroLine: ['Hair people', 'remember.'],
     heroText: 'Styling, colour and make-up for every day and for the moments you retell. Marjan Petrov’s studio in the heart of Strumica.',
-    seeWork: 'See the work',
+    seeWork: 'See our creations',
     statYears: 'years of experience', statRating: 'Google rating', statVip: 'clients and stages',
     vip: 'VIP',
     marquee: ['Event styling', 'Colour', 'Sombre', 'Vibrance Gloss', 'Professional make-up', 'Waves', 'Updos', 'Editorial'],

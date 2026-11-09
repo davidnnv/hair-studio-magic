@@ -1,8 +1,8 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useApp } from '../lib/app.jsx';
 import { IMG, STUDIO } from '../lib/content.js';
-import { Counter, EASE, Reveal, RevealImage, RiseText } from '../components/bits.jsx';
+import { Counter, EASE, Icon, Reveal, RevealImage, RiseText } from '../components/bits.jsx';
 
 // "Meet the owner": a layered portrait collage with parallax, a gold frame that draws itself,
 // a giant name that slides behind, animated facts and a hand-drawn signature.
@@ -84,26 +84,75 @@ const STRIP = [
   { ...IMG.vipSelfie, w: 'tall' },
 ];
 
-// Horizontal film strip; drags on desktop, swipes on touch.
+// Horizontal photo strip: native scroll with snap (swipe on touch, trackpad/wheel, mouse drag),
+// arrow buttons and a progress bar. Every photo can be scrolled fully into view.
 function Backstage() {
   const { t } = useApp();
-  const track = useRef(null);
-  const wrap = useRef(null);
+  const ref = useRef(null);
+  const [state, setState] = useState({ p: 0, atStart: true, atEnd: false });
+  const drag = useRef(null);
+
+  const update = () => {
+    const el = ref.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setState({ p: max > 0 ? el.scrollLeft / max : 0, atStart: el.scrollLeft < 4, atEnd: el.scrollLeft > max - 4 });
+  };
+  useEffect(() => {
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const by = (dir) => {
+    const el = ref.current;
+    const item = el.querySelector('.strip-item');
+    const step = item ? item.getBoundingClientRect().width + 16 : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * step, behavior: 'smooth' });
+  };
+
+  // Mouse drag to scroll (touch already scrolls natively).
+  const onDown = (e) => {
+    if (e.pointerType !== 'mouse') return;
+    drag.current = { x: e.clientX, left: ref.current.scrollLeft, moved: false };
+    ref.current.classList.add('is-dragging');
+  };
+  const onMove = (e) => {
+    if (!drag.current) return;
+    const dx = e.clientX - drag.current.x;
+    if (Math.abs(dx) > 3) drag.current.moved = true;
+    ref.current.scrollLeft = drag.current.left - dx;
+  };
+  const onUp = () => {
+    if (!drag.current) return;
+    drag.current = null;
+    ref.current.classList.remove('is-dragging');
+  };
+
   return (
     <div className="backstage">
       <div className="wrap backstage-head">
-        <Reveal><h3 className="backstage-title serif-it">{t.backstageTitle}</h3></Reveal>
-        <Reveal delay={0.1}><p className="backstage-text">{t.backstageText}</p></Reveal>
+        <div>
+          <Reveal><h3 className="backstage-title serif-it">{t.backstageTitle}</h3></Reveal>
+          <Reveal delay={0.1}><p className="backstage-text">{t.backstageText}</p></Reveal>
+        </div>
+        <div className="strip-nav">
+          <button type="button" className="strip-btn" onClick={() => by(-1)} disabled={state.atStart} aria-label={t.prev}><Icon name="left" /></button>
+          <button type="button" className="strip-btn" onClick={() => by(1)} disabled={state.atEnd} aria-label={t.next}><Icon name="right" /></button>
+        </div>
       </div>
-      <div className="strip" ref={wrap}>
-        <motion.ul className="strip-track" ref={track} drag="x" dragConstraints={wrap} dragElastic={0.08}>
-          {STRIP.map((s, i) => (
-            <motion.li key={s.src} className={`strip-item is-${s.w}`} initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '0px -5% 0px 0px' }} transition={{ duration: 0.9, delay: i * 0.08, ease: EASE }}>
-              <img src={s.src} alt="" style={{ objectPosition: s.pos }} loading="lazy" draggable="false" />
-            </motion.li>
-          ))}
-        </motion.ul>
+      <motion.ul className="strip" ref={ref} onScroll={update} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp}
+        initial="hide" whileInView="show" viewport={{ once: true, margin: '-10% 0px' }} variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+        tabIndex={0} aria-label={t.backstageTitle}>
+        {STRIP.map((s) => (
+          <motion.li key={s.src} className={`strip-item is-${s.w}`}
+            variants={{ hide: { opacity: 0, y: 50 }, show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } } }}>
+            <img src={s.src} alt="" style={{ objectPosition: s.pos }} loading="lazy" draggable="false" />
+          </motion.li>
+        ))}
+      </motion.ul>
+      <div className="wrap">
+        <div className="strip-progress" aria-hidden="true"><span style={{ transform: `scaleX(${Math.max(0.08, state.p)})` }} /></div>
       </div>
     </div>
   );

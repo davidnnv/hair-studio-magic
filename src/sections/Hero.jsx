@@ -79,8 +79,18 @@ export function Marquee() {
   return (
     <div className="marquee" aria-hidden="true">
       <div className="marquee-track">
-        {items.map((m, i) => <span key={i}>{m}<i>✦</i></span>)}
+        {items.map((m, i) => <span key={i}>{m}<i><Scissors /></i></span>)}
       </div>
     </div>
+  );
+}
+
+// Small open scissors used between the marquee words.
+function Scissors() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
+      <circle cx="6" cy="6" r="3" /><circle cx="6" cy="18" r="3" />
+      <path d="M8.1 8.1L20 20M8.1 15.9L20 4M14.5 12l1 1" />
+    </svg>
   );
 }

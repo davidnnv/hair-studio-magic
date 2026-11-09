@@ -149,7 +149,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
 .marquee span { display: inline-flex; align-items: center; gap: 34px; padding-right: 34px; font: italic 500 clamp(1.6rem, 1.2rem + 1.6vw, 2.6rem)/1 var(--f-serif); white-space: nowrap; }
 .marquee span:nth-child(odd) { color: var(--gold); }
-.marquee i { font-style: normal; font-size: .5em; color: var(--muted-dark); }
+.marquee i { display: inline-grid; place-items: center; color: var(--gold); opacity: .8; }
+.marquee i svg { width: .7em; height: .7em; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 
@@ -231,11 +232,24 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .backstage-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
 .backstage-title { font-size: clamp(2.2rem, 1.6rem + 2.2vw, 3.4rem); line-height: 1; }
 .backstage-text { color: var(--muted-dark); }
-.strip { overflow: hidden; cursor: grab; padding-left: max(20px, env(safe-area-inset-left, 0px)); }
-.strip:active { cursor: grabbing; }
-@media (min-width: 1024px) { .strip { padding-left: max(48px, calc((100vw - var(--maxw)) / 2 + 48px)); } }
-.strip-track { list-style: none; margin: 0; padding: 0 20px 0 0; display: flex; gap: 16px; width: max-content; touch-action: pan-y; }
-.strip-item { height: clamp(280px, 40vw, 440px); flex-shrink: 0; overflow: hidden; border-radius: 4px; }
+.backstage-head { align-items: flex-end; }
+.strip-nav { display: flex; gap: 10px; }
+.strip-btn { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--line-dark); background: none; color: var(--ivory); display: grid; place-items: center; transition: background-color .3s ease, color .3s ease, opacity .3s ease; }
+.strip-btn:hover:not(:disabled) { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.strip-btn:disabled { opacity: .3; cursor: default; }
+.strip {
+  list-style: none; margin: 0; display: flex; gap: 16px; overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; outline-offset: -2px;
+  --edge: max(20px, env(safe-area-inset-left, 0px));
+  padding: 4px var(--edge) 8px; scroll-padding-inline: var(--edge);
+}
+.strip::-webkit-scrollbar { display: none; }
+.strip.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+@media (min-width: 1024px) { .strip { --edge: max(48px, calc((100vw - var(--maxw)) / 2 + 48px)); } }
+.strip::after { content: ""; flex: 0 0 1px; } /* keeps the right padding when scrolled to the end */
+.strip-item { scroll-snap-align: start; height: clamp(300px, 40vw, 440px); flex-shrink: 0; overflow: hidden; border-radius: 4px; max-width: calc(100vw - 56px); }
+.strip-progress { height: 2px; background: var(--line-dark); margin-top: 26px; overflow: hidden; border-radius: 2px; }
+.strip-progress span { display: block; height: 100%; background: var(--gold-grad); transform-origin: 0 50%; transition: transform .25s linear; }
 .strip-item.is-tall { width: clamp(210px, 28vw, 330px); }
 .strip-item.is-mid { width: clamp(220px, 30vw, 350px); }
 .strip-item.is-wide { width: clamp(300px, 42vw, 480px); }
@@ -348,3 +362,4 @@ a.c-big:hover { color: var(--gold-hi); }
 .callcard-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 .callcard-x { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line-dark); background: none; display: grid; place-items: center; }
 .callcard-x:hover { border-color: var(--gold); color: var(--gold); }
+.sec-head-row > * { min-width: 0; max-width: 100%; }
