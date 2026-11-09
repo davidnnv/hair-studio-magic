@@ -45,7 +45,7 @@ export const WORK = [
 export const T = {
   mk: {
     nav: { services: 'Услуги', owner: 'Марјан', work: 'Работи', contact: 'Контакт' },
-    book: 'Закажи термин', call: 'Јави се', langSwitch: 'EN', langLabel: 'Switch to English',
+    book: 'Закажи термин', call: 'Јави се', callHint: 'На телефон копчето директно го бира бројот. Од компјутер, јави се на бројот погоре или копирај го.', langSwitch: 'EN', langLabel: 'Switch to English',
     menu: 'Мени', close: 'Затвори',
     heroKicker: 'Hair & make-up studio · Струмица',
     heroLine: ['Коса што', 'се памети.'],
@@ -64,16 +64,15 @@ export const T = {
     ownerKicker: 'Запознај го сопственикот',
     ownerName: ['Марјан', 'Петров'],
     ownerRole: 'Hair & make-up stylist · основач на MAGIC',
-    ownerLead: 'Повеќе од седум години Марјан ја гради MAGIC како место каде косата се третира како уметност.',
+    ownerLead: 'Повеќе од седум години го гради MAGIC како место каде што косата се третира како уметност.',
     ownerBody: [
       'Го знаат по брановите што траат цела ноќ, по русото што не пожолтува и по шминката што изгледа исто толку добро во живо колку и на камера.',
-      'Во студиото на плоштадот во Струмица седат и невести и матурантки, и пејачки и модели. Неговите VIP клиенти се враќаат затоа што секоја фризура е направена за лицето, стилот и моментот, а не по шаблон.',
     ],
     ownerSign: 'Марјан Петров',
     ownerFacts: [
-      { n: 7, suffix: '+', label: 'години на свое студио' },
+      { n: 7, suffix: '+', label: 'години со свое студио' },
       { n: 4.8, suffix: '★', label: 'просечна оценка на Google', decimals: 1 },
-      { n: 3, suffix: '', label: 'спојени вештини: фризура, боја, шминка' },
+      { n: 3, suffix: '', label: 'клучни вештини: фризура, боја, шминка' },
     ],
     backstageTitle: 'Зад столицата',
     backstageText: 'Од студиото до сцени, снимања и настани.',
@@ -97,7 +96,7 @@ export const T = {
   },
   en: {
     nav: { services: 'Services', owner: 'Marjan', work: 'Work', contact: 'Contact' },
-    book: 'Book an appointment', call: 'Call', langSwitch: 'МК', langLabel: 'Префрли на македонски',
+    book: 'Book an appointment', call: 'Call', callHint: 'On a phone the button dials straight away. On a computer, call the number above or copy it.', langSwitch: 'МК', langLabel: 'Префрли на македонски',
     menu: 'Menu', close: 'Close',
     heroKicker: 'Hair & make-up studio · Strumica',
     heroLine: ['Hair people', 'remember.'],
@@ -116,16 +115,15 @@ export const T = {
     ownerKicker: 'Meet the owner',
     ownerName: ['Marjan', 'Petrov'],
     ownerRole: 'Hair & make-up stylist · founder of MAGIC',
-    ownerLead: 'For more than seven years Marjan has built MAGIC into a place where hair is treated as craft.',
+    ownerLead: 'For more than seven years he has been building MAGIC into a place where hair is treated as art.',
     ownerBody: [
       'He is known for waves that last all night, blonde that never turns brassy, and make-up that looks as good in person as it does on camera.',
-      'Brides and prom girls, singers and models all sit in the studio on Strumica’s main square. His VIP clients keep coming back because every look is made for the face, the style and the moment, never from a template.',
     ],
     ownerSign: 'Marjan Petrov',
     ownerFacts: [
-      { n: 7, suffix: '+', label: 'years running his own studio' },
+      { n: 7, suffix: '+', label: 'years with his own studio' },
       { n: 4.8, suffix: '★', label: 'average Google rating', decimals: 1 },
-      { n: 3, suffix: '', label: 'crafts in one chair: hair, colour, make-up' },
+      { n: 3, suffix: '', label: 'key skills: hair, colour, make-up' },
     ],
     backstageTitle: 'Behind the chair',
     backstageText: 'From the studio to stages, shoots and events.',

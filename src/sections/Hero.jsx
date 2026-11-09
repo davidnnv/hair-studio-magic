@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useApp, scrollToId } from '../lib/app.jsx';
 import { IMG, STUDIO } from '../lib/content.js';
+import { CallLink } from '../components/CallLink.jsx';
 import { Counter, EASE, GoldDust, Icon } from '../components/bits.jsx';
 
 const LETTERS = 'MAGIC'.split('');
@@ -37,7 +38,7 @@ export default function Hero() {
           </h1>
           <motion.p className="hero-text" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1, duration: 0.9, ease: EASE }}>{t.heroText}</motion.p>
           <motion.div className="hero-cta" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.15, duration: 0.9, ease: EASE }}>
-            <a className="btn btn-gold" href={`tel:${STUDIO.tel}`}><Icon name="phone" size={18} /> {t.book}</a>
+            <CallLink className="btn btn-gold"><Icon name="phone" size={18} /> {t.book}</CallLink>
             <button type="button" className="btn btn-line" onClick={() => scrollToId('work')}>{t.seeWork} <Icon name="arrow" size={18} /></button>
           </motion.div>
           <motion.dl className="hero-stats" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.35, duration: 1 }}>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useApp, fill } from '../lib/app.jsx';
 import { IMG, STUDIO } from '../lib/content.js';
+import { CallLink, useShowCall } from '../components/CallLink.jsx';
 import { EASE, Icon, Reveal, RiseText } from '../components/bits.jsx';
 import { Wordmark } from '../components/Nav.jsx';
 
@@ -49,7 +50,7 @@ export default function Contact() {
           <dl className="contact-list">
             <Reveal delay={0.2} className="c-row">
               <dt><Icon name="phone" /> {t.phone}</dt>
-              <dd><a href={`tel:${STUDIO.tel}`} className="c-big">{STUDIO.phone}</a></dd>
+              <dd><CallLink className="c-big">{STUDIO.phone}</CallLink></dd>
             </Reveal>
             <Reveal delay={0.25} className="c-row">
               <dt><Icon name="pin" /> {t.address}</dt>
@@ -69,7 +70,7 @@ export default function Contact() {
               </dd>
             </Reveal>
           </dl>
-          <Reveal delay={0.35}><a className="btn btn-gold" href={`tel:${STUDIO.tel}`}><Icon name="phone" size={18} /> {t.book}</a></Reveal>
+          <Reveal delay={0.35}><CallLink className="btn btn-gold"><Icon name="phone" size={18} /> {t.book}</CallLink></Reveal>
         </div>
 
         <motion.div className="map" initial={{ clipPath: 'inset(0 0 100% 0)' }} whileInView={{ clipPath: 'inset(0 0 0% 0)' }} viewport={{ once: true }} transition={{ duration: 1.2, ease: EASE }}>
@@ -88,7 +89,7 @@ export function Footer() {
       <div className="wrap footer-row">
         <Wordmark />
         <div className="footer-links">
-          <a href={`tel:${STUDIO.tel}`}>{STUDIO.phone}</a>
+          <CallLink>{STUDIO.phone}</CallLink>
           <a href={STUDIO.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href={STUDIO.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
         </div>
@@ -104,8 +105,9 @@ export function Footer() {
 // Floating call button on phones.
 export function CallFab() {
   const { t } = useApp();
+  const showCall = useShowCall();
   return (
-    <motion.a className="call-fab" href={`tel:${STUDIO.tel}`} aria-label={`${t.call} ${STUDIO.phone}`}
+    <motion.a className="call-fab" href={`tel:${STUDIO.tel}`} onClick={() => { if (!window.matchMedia('(pointer: coarse)').matches) showCall(); }} aria-label={`${t.call} ${STUDIO.phone}`}
       initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2, type: 'spring', stiffness: 260, damping: 16 }}>
       <Icon name="phone" size={22} />
       <span className="call-ping" aria-hidden="true" />

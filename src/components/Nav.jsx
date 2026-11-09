@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { useApp, scrollToId } from '../lib/app.jsx';
 import { STUDIO } from '../lib/content.js';
+import { CallLink } from './CallLink.jsx';
 import { EASE, Icon } from './bits.jsx';
 
 const LINKS = ['services', 'owner', 'work', 'contact'];
@@ -61,7 +62,7 @@ export default function Nav() {
           </nav>
           <div className="nav-actions">
             <button type="button" className="lang-btn" onClick={() => setLang(lang === 'mk' ? 'en' : 'mk')} aria-label={t.langLabel}>{t.langSwitch}</button>
-            <a className="btn btn-gold btn-sm nav-book" href={`tel:${STUDIO.tel}`}><Icon name="phone" size={16} /> {t.book}</a>
+            <CallLink className="btn btn-gold btn-sm nav-book"><Icon name="phone" size={16} /> {t.book}</CallLink>
             <button type="button" className={`burger${open ? ' is-open' : ''}`} onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? t.close : t.menu}>
               <span /><span />
             </button>
@@ -81,7 +82,7 @@ export default function Nav() {
               ))}
             </nav>
             <motion.div className="mmenu-foot" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-              <a className="btn btn-gold" href={`tel:${STUDIO.tel}`}><Icon name="phone" size={18} /> {STUDIO.phone}</a>
+              <CallLink className="btn btn-gold"><Icon name="phone" size={18} /> {STUDIO.phone}</CallLink>
               <div className="mmenu-social">
                 <a href={STUDIO.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Icon name="insta" /></a>
                 <a href={STUDIO.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Icon name="fb" /></a>

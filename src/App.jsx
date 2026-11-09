@@ -6,6 +6,7 @@ import Services from './sections/Services.jsx';
 import Owner from './sections/Owner.jsx';
 import Work from './sections/Work.jsx';
 import Contact, { CallFab, Footer, Rating } from './sections/Contact.jsx';
+import { CallProvider } from './components/CallLink.jsx';
 
 function Progress() {
   const { scrollYProgress } = useScroll();
@@ -16,6 +17,7 @@ function Progress() {
 export default function App() {
   return (
     <AppProvider>
+      <CallProvider>
       <Progress />
       <Nav />
       <main>
@@ -29,6 +31,7 @@ export default function App() {
       </main>
       <Footer />
       <CallFab />
+      </CallProvider>
     </AppProvider>
   );
 }
